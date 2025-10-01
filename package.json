@@ -1,0 +1,57 @@
+{
+  "name": "stellarium-connectro",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/JakubBajorekCT/stellarium-connectro#readme",
+  "bugs": {
+    "url": "https://github.com/JakubBajorekCT/stellarium-connectro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakubBajorekCT/stellarium-connectro.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "src/index.ts",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "all": "npm run format && npm run lint && npm run test && npm run typecheck",
+    "typecheck": "npx tsc --noEmit",
+    "test:verbose": "NODE_OPTIONS=\"--trace-deprecation\" jest --verbose --coverage",
+    "test": "NODE_OPTIONS=\"--trace-deprecation\" JEST_DEBUG=true SC_LOG_LEVEL=warn jest --silent=false --coverage",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}' 'tests/**/*.{ts,tsx,js,jsx}'",
+    "format:check": "prettier --check 'src/**/*.{ts,tsx,js,jsx}' 'tests/**/*.{ts,tsx,js,jsx}'",
+    "lint": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}' --max-warnings=0",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' 'tests/**/*.{ts,tsx}' --max-warnings=0 --fix",
+    "start": "SC_LOG_LEVEL=info npx ts-node ./src/index.ts",
+    "start:debug": "node --inspect-brk -r ts-node/register ./src/index.ts"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "22.0.2",
+    "@types/jest": "30.0.0",
+    "@types/luxon": "3.7.1",
+    "@types/node": "24.3.0",
+    "@typescript-eslint/eslint-plugin": "8.40.0",
+    "@typescript-eslint/parser": "8.40.0",
+    "eslint": "9.34.0",
+    "jest": "30.0.5",
+    "mockdate": "3.0.5",
+    "nock": "14.0.10",
+    "prettier": "3.6.2",
+    "ts-jest": "29.4.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "axios": "1.12.2",
+    "consola": "3.4.2",
+    "dms-conversion": "3.1.4",
+    "luxon": "3.7.1",
+    "winston": "3.17.0"
+  }
+}

@@ -1,0 +1,36 @@
+services:
+  connectro:
+    build:
+      dockerfile: _Connectro.Dockerfile
+      context: .
+    container_name: connectro
+    ports:
+      - "10000:10000"
+    environment:
+      - RUNNING_IN_DOCKER=true
+      - SC_CONNECTRO_PORT=10000
+      - SC_STELLARIUM_HOST=stellarium
+      - SC_STELLARIUM_PORT=8090
+      - SC_LOG_LEVEL=info
+
+  stellarium:
+    build:
+      dockerfile: _Stellarium.Dockerfile
+      context: .
+    container_name: stellarium
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/runtime-dir
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
+      - QT_QPA_PLATFORM=wayland
+    volumes:
+      - ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:/tmp/runtime-dir/${WAYLAND_DISPLAY}
+      - stellarium-config:/root/.stellarium
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - 44
+    stdin_open: true
+    tty: true
+
+volumes:
+  stellarium-config:
